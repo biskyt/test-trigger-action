@@ -16,9 +16,15 @@ jobs:
           --data '{"event_type": "ping", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
 
       - name: workflow dispatch
-        run: |
-          curl \
-            -X POST https://api.github.com/repos/biskyt/test-action/actions/workflows/test-1/dispatches \
-            -H "Accept: application/vnd.github.v3+json" \
-            -u ${{ secrets.TEST_PAT }} \
-            -d '{"ref":"ref"}'
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          repo: biskyt/test-action
+          workflow: Testing123
+          token: ${{ secrets.TEST_PAT }}
+          inputs: '{ "message": "blah blah", "debug": true }'
+        # run: |
+        #   curl \
+        #     -X POST https://api.github.com/repos/biskyt/test-action/actions/workflows/test-1/dispatches \
+        #     -H "Accept: application/vnd.github.v3+json" \
+        #     -u ${{ secrets.TEST_PAT }} \
+        #     -d '{"ref":"ref"}'
