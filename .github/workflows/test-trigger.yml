@@ -23,8 +23,8 @@ jobs:
         with:
           # You should create a personal access token and store it in your repository
           token: ${{ secrets.TKLACCESS_TOKEN }}
-          repo: test-action
-          owner: biskyt
+          repo: external-action-runner
+          owner: toukanlabs
           event_type: build
           message: | 
             { 
