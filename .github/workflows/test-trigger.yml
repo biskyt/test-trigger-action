@@ -18,7 +18,7 @@ jobs:
       - name: workflow dispatch
         run: |
           curl \
-            -X POST \
+            -X POST https://api.github.com/repos/biskyt/test-action/actions/workflows/test-1/dispatches \
             -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/biskyt/test-action/actions/workflows/test-1/dispatches \
+            -u ${{ secrets.TEST_PAT }} \
             -d '{"ref":"ref"}'
