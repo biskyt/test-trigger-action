@@ -20,7 +20,7 @@ jobs:
         with:
           repo: biskyt/test-action
           workflow: Testing123
-          token: ${{ secrets.TEST_PAT }}
+          token: ${{ secrets.TKLACCESS_TOKEN }}
           inputs: '{ "message": "blah blah", "debug": true }'
         # run: |
         #   curl \
