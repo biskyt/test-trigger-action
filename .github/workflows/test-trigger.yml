@@ -8,19 +8,28 @@ jobs:
   trigger-build:
     runs-on: ubuntu-latest
     steps:
-      - name: "repository dispatch"
-        run: |
-          curl -X POST https://api.github.com/repos/biskyt/test-action/dispatches \
-          -H 'Accept: application/vnd.github.everest-preview+json' \
-          -u ${{ secrets.TEST_PAT }} \
-          --data '{"event_type": "ping", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
+      # - name: "repository dispatch"
+      #   run: |
+      #     curl -X POST https://api.github.com/repos/biskyt/test-action/dispatches \
+      #     -H 'Accept: application/vnd.github.everest-preview+json' \
+      #     -u ${{ secrets.TEST_PAT }} \
+      #     --data '{"event_type": "ping", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
 
-      - name: workflow dispatch
-        uses: benc-uk/workflow-dispatch@v1
+      - name: Emit repository_dispatch
+        uses: mvasigh/dispatch-action@main
         with:
-          repo: biskyt/test-action
-          workflow: Testing123
+          # You should create a personal access token and store it in your repository
           token: ${{ secrets.TKLACCESS_TOKEN }}
+          repo: test-action
+          owner: biskyt
+          event_type: build
+
+      # - name: workflow dispatch
+      #   uses: benc-uk/workflow-dispatch@v1
+      #   with:
+      #     repo: biskyt/test-action
+      #     workflow: Testing123
+      #     token: ${{ secrets.TKLACCESS_TOKEN }}
 
         # run: |
         #   curl \
