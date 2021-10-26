@@ -15,6 +15,9 @@ jobs:
       #     -u ${{ secrets.TEST_PAT }} \
       #     --data '{"event_type": "ping", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
 
+      - name: Resolve ref
+        uses: rlespinasse/github-slug-action@v3.x
+
       - name: Emit repository_dispatch
         uses: mvasigh/dispatch-action@main
         with:
@@ -23,6 +26,11 @@ jobs:
           repo: test-action
           owner: biskyt
           event_type: build
+          message: | 
+            { 
+              "GITHUB_REF_NAME": "${{ env.GITHUB_REF_NAME }}",
+              "GITHUB_REF_SLUG": "${{ env.GITHUB_REF_SLUG }}"
+            }
 
       # - name: workflow dispatch
       #   uses: benc-uk/workflow-dispatch@v1
