@@ -21,7 +21,7 @@ jobs:
           repo: biskyt/test-action
           workflow: Testing123
           token: ${{ secrets.TKLACCESS_TOKEN }}
-          inputs: '{ "message": "blah blah", "debug": true }'
+
         # run: |
         #   curl \
         #     -X POST https://api.github.com/repos/biskyt/test-action/actions/workflows/test-1/dispatches \
