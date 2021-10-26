@@ -1,0 +1,16 @@
+name: Test trigger send
+
+on:
+  push:
+    
+
+jobs:
+  trigger-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: PING - Dispatch initiating repository event
+        run: |
+          curl -X POST https://api.github.com/repos/biskyt/test-action/dispatches \
+          -H 'Accept: application/vnd.github.everest-preview+json' \
+          -u ${{ secrets.TEST_PAT }} \
+          --data '{"event_type": "ping", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
