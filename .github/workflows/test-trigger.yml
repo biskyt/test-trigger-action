@@ -6,6 +6,7 @@ on:
 
 jobs:
   trigger-build:
+    # if: ( github.repository == 'openeyes/OpenEyes' || github.repository == 'biskyt/test-action-trigger' )
     runs-on: ubuntu-latest
     steps:
       # - name: "repository dispatch"
