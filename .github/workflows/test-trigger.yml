@@ -15,28 +15,28 @@ jobs:
 
       - name: Emit repository_dispatch
         uses: mvasigh/dispatch-action@main
-        with:
-          # You should create a personal access token and store it in your repository
-          token: ${{ secrets.TKLACCESS_TOKEN }}
-          repo: test-action
-          owner: biskyt
-          event_type: build
-          message: | 
-            { 
-              "GITHUB_REF_NAME": "${{ env.GITHUB_REF_NAME }}",
-              "GITHUB_REF_SLUG": "${{ env.GITHUB_REF_SLUG }}"
-            }
         # with:
         #   # You should create a personal access token and store it in your repository
         #   token: ${{ secrets.TKLACCESS_TOKEN }}
-        #   repo: external-action-runner
-        #   owner: toukanlabs
+        #   repo: test-action
+        #   owner: biskyt
         #   event_type: build
         #   message: | 
         #     { 
         #       "GITHUB_REF_NAME": "${{ env.GITHUB_REF_NAME }}",
         #       "GITHUB_REF_SLUG": "${{ env.GITHUB_REF_SLUG }}"
         #     }
+        with:
+          # You should create a personal access token and store it in your repository
+          token: ${{ secrets.TKLACCESS_TOKEN }}
+          repo: external-action-runner
+          owner: toukanlabs
+          event_type: build
+          message: | 
+            { 
+              "GITHUB_REF_NAME": "${{ env.GITHUB_REF_NAME }}",
+              "GITHUB_REF_SLUG": "${{ env.GITHUB_REF_SLUG }}"
+            }
 
       # - name: workflow dispatch
       #   uses: benc-uk/workflow-dispatch@v1
