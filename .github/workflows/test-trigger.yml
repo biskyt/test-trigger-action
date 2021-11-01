@@ -13,56 +13,42 @@ jobs:
       - name: Resolve ref
         uses: rlespinasse/github-slug-action@v3.x
 
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v3
+      # - name: Docker meta
+      #   id: meta
+      #   uses: docker/metadata-action@v3
+      #   with:
+      #     images: name/app
+      #     tags: |
+      #       type=ref,event=branch
+      #       type=ref,event=pr
+      #       type=semver,pattern={{version}}
+      #       type=semver,pattern={{major}}.{{minor}}
+      #       type=sha
+
+      # - name: TEST
+      #   run: echo "${{ steps.meta.outputs.tags }}"
+
+      - name: Emit repository_dispatch
+        uses: mvasigh/dispatch-action@main
+        # with:
+        #   # You should create a personal access token and store it in your repository
+        #   token: ${{ secrets.TKLACCESS_TOKEN }}
+        #   repo: test-action
+        #   owner: biskyt
+        #   event_type: build
+        #   message: | 
+        #     { 
+        #       "GITHUB_REF_NAME": "${{ env.GITHUB_REF_NAME }}",
+        #       "GITHUB_REF_SLUG": "${{ env.GITHUB_REF_SLUG }}"
+        #     }
         with:
-          images: name/app
-          tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=sha
-
-      - name: TEST
-        run: echo "${{ steps.meta.outputs.tags }}"
-
-      # - name: Emit repository_dispatch
-      #   uses: mvasigh/dispatch-action@main
-      #   # with:
-      #   #   # You should create a personal access token and store it in your repository
-      #   #   token: ${{ secrets.TKLACCESS_TOKEN }}
-      #   #   repo: test-action
-      #   #   owner: biskyt
-      #   #   event_type: build
-      #   #   message: | 
-      #   #     { 
-      #   #       "GITHUB_REF_NAME": "${{ env.GITHUB_REF_NAME }}",
-      #   #       "GITHUB_REF_SLUG": "${{ env.GITHUB_REF_SLUG }}"
-      #   #     }
-      #   with:
-      #     # You should create a personal access token and store it in your repository
-      #     token: ${{ secrets.TKLACCESS_TOKEN }}
-      #     repo: external-action-runner
-      #     owner: toukanlabs
-      #     event_type: "Build Image: ${{ env.GITHUB_REF_NAME }}"
-      #     message: | 
-      #       { 
-      #         "GITHUB_REF_NAME": "${{ env.GITHUB_REF_NAME }}",
-      #         "GITHUB_REF_SLUG": "${{ env.GITHUB_REF_SLUG }}"
-      #       }
-
-      # - name: workflow dispatch
-      #   uses: benc-uk/workflow-dispatch@v1
-      #   with:
-      #     repo: biskyt/test-action
-      #     workflow: Testing123
-      #     token: ${{ secrets.TKLACCESS_TOKEN }}
-
-        # run: |
-        #   curl \
-        #     -X POST https://api.github.com/repos/biskyt/test-action/actions/workflows/test-1/dispatches \
-        #     -H "Accept: application/vnd.github.v3+json" \
-        #     -u ${{ secrets.TEST_PAT }} \
-        #     -d '{"ref":"ref"}'
+          # You should create a personal access token and store it in your repository
+          token: ${{ secrets.TKLACCESS_TOKEN }}
+          repo: external-action-runner
+          owner: toukanlabs
+          event_type: "Build Image: ${{ env.GITHUB_REF_NAME }}"
+          message: | 
+            { 
+              "GITHUB_REF_NAME": "${{ env.GITHUB_REF_NAME }}",
+              "GITHUB_REF_SLUG": "${{ env.GITHUB_REF_SLUG }}"
+            }
