@@ -31,7 +31,7 @@ jobs:
           token: ${{ secrets.TKLACCESS_TOKEN }}
           repo: external-action-runner
           owner: toukanlabs
-          event_type: "${{ env.GITHUB_REF_NAME }}"
+          event_type: "Build Image: ${{ env.GITHUB_REF_NAME }}"
           message: | 
             { 
               "GITHUB_REF_NAME": "${{ env.GITHUB_REF_NAME }}",
